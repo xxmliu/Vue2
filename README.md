@@ -148,3 +148,14 @@ data: {
 },
 ```
 
+# 脚手架开发VUE-CLI
+
+```bash
+# 命令名称 安装 全局 安装包的名字
+npm i -g @vue/cli
+# 查看安装版本
+vue --version
+# 生成项目包
+vue create vue-pro(文件名)
+```
+

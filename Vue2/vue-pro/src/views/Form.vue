@@ -14,6 +14,23 @@
     注册邮箱：<input type="text" v-model="form.email" />
     <p>{{ errorMsg.emailMsg }}</p>
     <hr />
+    选择性别：
+    <input value="男" type="radio" v-model="form.gender" /> 男
+    <input value="女" type="radio" v-model="form.gender" /> 女
+    <hr />
+    选择爱好:
+    <input value="健身" type="checkbox" v-model="form.hobby" /> 健身
+    <input value="游泳" type="checkbox" v-model="form.hobby" /> 游泳
+    <input value="拉丁" type="checkbox" v-model="form.hobby" /> 拉丁
+    <hr />
+    选择籍贯：
+    <select v-model="form.pro">
+      <option value="河南省">河南省</option>
+      <option value="河北省">河北省</option>
+      <option value="山东省">山东省</option>
+      <option value="山西省">山西省</option>
+    </select>
+    <hr />
     <button @click="btn()">注册</button>
   </div>
 </template>
@@ -27,6 +44,9 @@ export default {
         password: "",
         phone: "",
         email: "",
+        gender: "", // 性别
+        hobby: ['游泳','健身'],  // 爱好 多选框空数组
+        pro: '山西省',    // 籍贯
       },
       errorMsg: {
         userMsg: "",

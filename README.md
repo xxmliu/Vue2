@@ -205,3 +205,20 @@ export default router
 6. v-pre 原样显示{{}}
 7. v-for 循环输出多个当前元素
 8. v-if 判断
+
+# v-for的用法
+
+v-for指令用于循环输出当前元素。例如：  
+
+```html
+<p v-for="items in names" :key="items">{{ items }}</p>
+```
+
+```js
+data() {
+  return {
+    names: ["paopao", "liangliang", "xiaoxin", "xiaoming"],
+  };
+},
+```
+

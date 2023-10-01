@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import IndexView from '../views/IndexView.vue'
 import MovieDetail from '../views/MovieDetail.vue'
 import Derctive from '../views/Directive.vue'
+import Cart from '../views/Cart.vue'
 
 
 Vue.use(VueRouter)
@@ -36,6 +37,11 @@ const routes = [
     path: '/directive',
     name: 'directive',
     component: () => import('../views/Directive.vue')
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import('../views/Cart.vue')
   }
 ]
 

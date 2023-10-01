@@ -160,3 +160,48 @@ vue create vue-pro(文件名)
 ```
 
 当脚手架启动时，将会打开 public/index.html ，并且在该网页中运行 main.js ，将会创建 Vue 对象，通过Vue 对象来管理 index.html 中的 #app 内容的显示。初始化状态下，默认将 App.vue 组件中的内容渲染到#app 中，从而看到页面效果 。
+
+# vue-router路由
+
+引入官方的vue-router路由模块，定义路由组件（在routes中使用component进行映射组件，用name导航到对应路由），创建router实例，传入routes配置，在里面定义路由模式history，最后在App.vue中使用router-link跳转并且设置路由占位符。
+
+```js
+import Vue from 'vue'
+// 1.引入官方路由模块
+import VueRouter from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+import IndexView from '../views/IndexView.vue'
+
+Vue.use(VueRouter)
+
+// 2.在routes中使用component进行映射组件，用name导航到对应路由
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  }
+]
+
+// 3.创建router实例，传入routes配置，在里面定义路由模式history
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
+```
+
+# Vue的常用指令  
+
+**当vue加载template时，发现元素的属性时v-开头的属性，就会当做是vue指令来处理。常用的指令有：**  
+
+1. v-on 绑定事件
+2. v-bind 绑定属性
+3. v-show 动态显示或隐藏元素
+4. v-text 显示文本
+5. v-html 解析并显示html代码
+6. v-pre 原样显示{{}}
+7. v-for 循环输出多个当前元素
+8. v-if 判断

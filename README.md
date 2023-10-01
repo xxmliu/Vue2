@@ -257,3 +257,23 @@ v-for指令一般都需要配一个v-bind:key指令（简写 :key）来为当前
 }
 ```
 
+# v-model 双向数据绑定
+
+实现name变量与文本框输入的值之间的双向数据绑定：  
+
+- 如果用户在输入框中输入内容（修改value），则data中的name变量将会更新 。
+- 如果程序使用js将data中的name变量进行修改，则文本框中的内容也会发生改变 。
+
+```html
+<input type="text" placeholder="请输入文本" v-model="name">
+<button>提交表单</button>
+```
+
+```js
+data(){
+  return {
+    name: ''
+  }
+}
+```
+

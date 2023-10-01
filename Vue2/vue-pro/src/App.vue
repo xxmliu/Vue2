@@ -7,6 +7,7 @@
       <router-link to="/movie/detail">MovieDetail</router-link>
       <router-link to="/directive">Directive</router-link>
       <router-link to="/cart">Cart</router-link>
+      <router-link to="/form">Form</router-link>
     </nav>
     <router-view/>
   </div>

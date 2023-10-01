@@ -5,6 +5,9 @@ import IndexView from '../views/IndexView.vue'
 import MovieDetail from '../views/MovieDetail.vue'
 import Derctive from '../views/Directive.vue'
 import Cart from '../views/Cart.vue'
+import Form from '../views/Form.vue'
+
+
 
 
 Vue.use(VueRouter)
@@ -42,6 +45,11 @@ const routes = [
     path: '/cart',
     name: 'cart',
     component: () => import('../views/Cart.vue')
+  },
+  {
+    path: '/form',
+    name: 'form',
+    component: () => import('../views/Form.vue')
   }
 ]
 

@@ -205,6 +205,7 @@ export default router
 6. v-pre 原样显示{{}}
 7. v-for 循环输出多个当前元素
 8. v-if 判断
+8. v-model 双向数据绑定  
 
 # v-for的用法
 
@@ -413,5 +414,22 @@ p {
   color: red;
 }
 </style>
+```
+
+# v-if
+
+v-if 与 v-show 的区别？
+
+- v-if控制一个dom元素是否输出
+- v-show控制一个dom元素是否显示
+
+如果在页面中频繁的操作dom树（dom节点频繁的新增与删除），肯定会影响页面性能。所以如果对于需要频繁切换显示或隐藏状态的dom元素应该使用v-show。
+
+```html
+<div v-if="boolean表达式"></div>
+<div v-else-if="boolean表达式"></div>
+<div v-else-if="boolean表达式"></div>
+<div v-else-if="boolean表达式"></div>
+<div v-else></div>
 ```
 

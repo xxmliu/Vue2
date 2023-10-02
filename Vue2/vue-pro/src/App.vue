@@ -9,6 +9,7 @@
       <router-link to="/cart">Cart</router-link>
       <router-link to="/form">Form</router-link>
       <router-link to="/request">Request</router-link>
+      <router-link to="/actors">Actors</router-link>
     </nav>
     <router-view/>
   </div>

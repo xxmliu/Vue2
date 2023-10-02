@@ -547,3 +547,49 @@ const myaxios = {
 export default myaxios
 ```
 
+# Vue中的自定义组件  
+
+​		被vue所管理的标签可以认为是vue的**组件（**Component**）**。 而在项目开发过程中，经常会遇到一些需要重复使用的标签结构及样式、脚本功能。vue提供了**自定义组件**的语法，可以让开发者将一些需要重复使用的页面结构、样式、功能组织在一起，作为一个子组件存在项目中。这样，如果需要使用这些结构时，直接引入该子组件即可。
+
+**父组件向子组件传递参数**  
+
+```html
+<person></person>
+<!-- 如果希望每一个person显示不同的人员信息，则需要在使用组件的时候向子组件传递参数 -->
+<person name="流川枫" avatar="http://xxxx/lcf.jpg"></person>
+```
+
+在子组件中就可以接收这两个自定义属性的值，从而更新子组件的UI。语法如下：  
+
+```vue
+<template>
+<div class="person">
+  <img :src="avatar" alt="">
+  <div>{{name}}</div>
+  </div>
+</template>
+<script>
+  export default {
+    // 当前组件有两个自定义属性，分别是：name与avatar
+    // 父组件可以通过这两个属性向当前组件传参：
+    // <person name="张三" avatar="张三.jpg"></person>
+    props: ['name', 'avatar']
+  };
+</script>
+```
+
+为自定义属性添加约束：
+
+```js
+props: {
+  name: {
+    type: String, // 用于约束参数类型 必须传递String过来
+    required: true, // 用于约束参数必填
+  },
+  avatar: {
+    type: String,
+    required: true,
+  },
+}
+```
+

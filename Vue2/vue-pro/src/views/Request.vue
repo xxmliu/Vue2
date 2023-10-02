@@ -69,6 +69,7 @@ import myaxios from '../http/MyAxios'
 
       // 基于myaxios发送post请求，通过关键字查询电影
       getMoviesLikeMyAxios() {
+        if(!this.keywored)return
         let url = 'https://api.88-hao.top/movie-infos/name'
         let params = {page:1, pagesize:20, name:this.keywored}
         myaxios.post(url, params).then(res => {

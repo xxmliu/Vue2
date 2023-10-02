@@ -7,6 +7,7 @@ import Derctive from '../views/Directive.vue'
 import Cart from '../views/Cart.vue'
 import Form from '../views/Form.vue'
 import Request from '../views/Request.vue'
+import Actors from '../views/Actors.vue'
 
 
 
@@ -56,6 +57,12 @@ const routes = [
     path: '/request',
     name: 'request',
     component: () => import('../views/Request.vue')
+  },
+  {
+    path: '/actors',
+    name: 'actors',
+    component: () => import('../views/Actors.vue')
+  
   }
 ]
 

@@ -454,3 +454,36 @@ directives: {
 }
 ```
 
+# Axios
+
+https://api.88-hao.top/movie-infos?page=1&pagesize=20
+
+axios是一个网络通信库。封装了原生的ajax，提供了一些简单的api（基于promise语法）方便的发送http、https请求 。
+
+```js
+import axios from 'axios'      // 引入axios
+let instance = axios.create()  // 创建axios实例
+```
+
+发送get请求
+
+```js
+instance({
+  url: '请求路径 http://localhost:3000',
+  method: 'GET',
+  params: {page:1, pagesize:20}
+}).then(res=>{}) // 请求成功后执行 .then
+  .catch(err=>{}) // 请求失败后执行 .catch
+```
+
+发送post请求
+
+```js
+instance({
+  url: '请求路径 http://localhost:3000',
+  method: 'POST',
+  data: 'page=1&pagesize=20&name=熊猫'
+}).then(res=>{}) // 请求成功后执行 .then
+  .catch(err=>{}) // 请求失败后执行 .catch
+```
+

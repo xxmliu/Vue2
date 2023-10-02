@@ -6,6 +6,7 @@ import MovieDetail from '../views/MovieDetail.vue'
 import Derctive from '../views/Directive.vue'
 import Cart from '../views/Cart.vue'
 import Form from '../views/Form.vue'
+import Request from '../views/Request.vue'
 
 
 
@@ -50,6 +51,11 @@ const routes = [
     path: '/form',
     name: 'form',
     component: () => import('../views/Form.vue')
+  },
+  {
+    path: '/request',
+    name: 'request',
+    component: () => import('../views/Request.vue')
   }
 ]
 

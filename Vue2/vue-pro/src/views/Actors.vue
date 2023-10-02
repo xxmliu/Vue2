@@ -1,6 +1,8 @@
 <template>
   <div>
     <!-- views/Actors.vue -->
+    <counter :min="-3" :max="15" :value="3"></counter>
+    <hr>
     <button @click="getActors">加载演员列表</button>
     <hr>
     <person 
@@ -22,6 +24,7 @@
 </template>
 
 <script>
+import Counter from '../components/Counter.vue';
 import Person from '../components/Person.vue';
 import myaxios from '../http/MyAxios'
 
@@ -30,7 +33,8 @@ export default {
   components: { 
     // 组件名（标签名）：组件对象
     Person: Person,   //简写：Person
-    MyPerson: Person
+    MyPerson: Person,
+    Counter
   },
   
   data() {

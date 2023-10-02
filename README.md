@@ -593,3 +593,48 @@ props: {
 }
 ```
 
+案例：自定义组件，设计一个计数器  
+
+```html
+<counter value="1" min="0" max="10"></counter>
+```
+
+组件自定义属性（父组件向子组件传参）  
+
+```js
+export default {
+  props: {
+    // 自定义属性
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 10
+    },
+    value: {
+      type: Number,
+      default: 1
+    }
+  },
+} 
+```
+
+对于子组件的自定义的属性，可以指定属性的类型、默认值、是否为必选属性。一旦定义好之后父组件就可以通过该属性向该子组件传参  
+
+```html
+<counter :min="3" :value="3"></counter>
+```
+
+子组件中接收了参数之后，即可在页面中访问该属性。**注意：在子组件中仅仅只是访问该属性，不建议修改，因为会影响父组件中变量的值。** 所以，如果业务功能需要修改属性值，则建议在data中声明一个变量，在子组件中使用该变量而不是直接修改属性：  
+
+```js
+props: ['value'],
+  data(){
+    return {
+      n: this.value
+    }
+}
+```
+

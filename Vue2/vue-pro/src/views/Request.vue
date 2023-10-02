@@ -3,11 +3,19 @@
     <div>
     <!-- views/Request.vue -->
     <h2>测试Axios的使用方法</h2>
-    
-    <button @click="getMovies">GET请求,加载电影列表</button>
+    <button @click="getMovies()">GET请求,加载电影列表</button>
     &nbsp;&nbsp; | &nbsp;&nbsp; 
     <input v-model="keyword" type="text" placeholder="请输入关键字">
-    <button @click="getMoviesLike">Post请求查询电影</button>
+    <button @click="getMoviesLike()">Post请求查询电影</button>
+    <hr>
+
+    <h2>测试封装MyAxios的使用方法</h2>
+    <button @click="getMoviesMyAxios()">GET请求,加载电影列表</button>
+    &nbsp;&nbsp; | &nbsp;&nbsp; 
+    <input v-model="keywored" type="text" placeholder="请输入关键字">
+    <button @click="getMoviesLikeMyAxios()">Post请求查询电影</button>
+    <hr>
+
     <h1>查询结果</h1>
     <div class="header" style="font-weight:bold;">
       <div class="cover">封面图片</div>
@@ -36,15 +44,40 @@
 
 <script>
 import axios from 'axios'
+import myaxios from '../http/MyAxios'
+
   export default {
     data() {
       return {
-        movies: [], // 用于保存需要显示的电影列表
-        keyword: '', // 与关键字输入框完成双向数据绑定
+        movies: [],   // 用于保存需要显示的电影列表
+        keyword: '',  // 与关键字输入框完成双向数据绑定
+        keywored: '', // 与关键字输入框完成双向数据绑定
       }
     },
 
     methods: {
+
+      // 基于myaxios发送get请求，加载电影详情
+      getMoviesMyAxios() {
+        let url = 'https://api.88-hao.top/movie-infos'
+        let params = {page:1, pagesize:20}
+        myaxios.get(url,params).then(res => {
+          console.log(res);
+          this.movies = res.data.data.result
+        })
+      },
+
+      // 基于myaxios发送post请求，通过关键字查询电影
+      getMoviesLikeMyAxios() {
+        let url = 'https://api.88-hao.top/movie-infos/name'
+        let params = {page:1, pagesize:20, name:this.keywored}
+        myaxios.post(url, params).then(res => {
+          console.log(res);
+          this.movies = res.data.data.result
+        })
+      },
+
+
       // 发送get请求，加载电影详情
       getMovies() {
         // 创建Axios实例
@@ -56,8 +89,6 @@ import axios from 'axios'
         }).then(res => {
           console.log(res);
           this.movies = res.data.data.result
-        }).create(err => {
-          console.warn(err);
         })
       },
 
@@ -74,8 +105,6 @@ import axios from 'axios'
         }).then(res => {
           console.log(res);
           this.movies = res.data.data.result
-        }).create(err => {
-          console.warn(err)
         })
       }
     },

@@ -487,3 +487,63 @@ instance({
   .catch(err=>{}) // 请求失败后执行 .catch
 ```
 
+# 封装Axios
+
+<u>由于axios官方提供的api使用频繁，细节很多，需要针对自己项目常用的场景进行封装，使得发请求更加方便</u>
+
+**期望：**
+
+- 无论发送get还是post请求，不要写太多代码，简单的调个get方法、post方法即可完成请求的发送。
+- 无论发送get还是post请求，传递的参数格式最好一致，不要一会是对象，一会时字符串。
+
+qs：ajax请求的get请求是通过URL传参的（以？和&符连接），而post大多是通过json传参的。qs是一个库。里面的stringify方法可以将		一个json对象直接转为(以?和&符连接的形式)。在开发中，发送请求的入参大多是一个对象。在发送时，如果该请求为get请求，就需		要对参数进行转化。使用该库，就可以自动转化，而不需要手动去拼接。
+
+```js
+import myAxios from 'MyAxios.js'
+// 发送get请求
+myAxios.get(url, {参数对象}).then(res=>{})
+// 发送post请求
+myAxios.post(url, {参数对象}).then(res=>{})
+```
+
+MyAxios.js:
+
+```js
+import axios from 'axios'
+// qs模块可以将对象转换为查询字符串,里面的stringify方法可以将一个json对象直接转为(以?和&符连接的形式)
+import qs from 'qs'
+
+// 创建Axios实例
+const instance = axios.create()
+const myaxios = {
+  /**
+   * 基于 axios 发送 get 请求，返回Promise对象
+   * @param {string} url    请求资源路径
+   * @param {object} params 请求资源
+   */
+  get(url, params) {
+    return instance({ 
+      url, 
+      params, 
+      method: 'GET' 
+    })
+  },
+
+  /**
+   * 基于 axios 发送 post 请求
+   * @param {string} url    请求资源路径
+   * @param {object} params 请求资源
+   */
+  post(url, params) {
+    return instance({ 
+      url, 
+      //qs模块里面的stringify方法可以将一个json对象直接转为(以?和&符连接的形式)
+      data: qs.stringify(params), 
+      method: 'POST' 
+    })
+  }
+}
+// 导出myaxios
+export default myaxios
+```
+

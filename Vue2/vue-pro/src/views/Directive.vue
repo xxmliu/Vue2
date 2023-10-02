@@ -2,7 +2,7 @@
   <div>
     <p v-for="items in names" :key="items">{{ items }}</p>
     <hr />
-    <h2>电影详情</h2>
+    <h2 v-red>电影详情</h2>
     <div class="movies" v-for="items in movies" :key="items.id">
       <img :src="items.url" alt="" />
       <div>
@@ -52,6 +52,17 @@ export default {
       ],
     };
   },
+
+  // 自定义指令
+  directives: {
+    red: {
+      // 一旦含有v-red指令的dom元素被插入到dom树中，执行该方法
+      // 传入的el就是绑定了v-red指令的dom对象
+      inserted (el) {
+        el.style.color = 'red'
+      }
+    }
+  }
 };
 </script>
 

@@ -433,3 +433,24 @@ v-if 与 v-show 的区别？
 <div v-else></div>
 ```
 
+# 自定义指令
+
+vue官方已经提供了很多内置指令，来操作当前dom元素。与此同时，vue还提供一种自定义指令的写法，可以让程序员自己设计指令来完成对dom的操作  
+
+```html
+<h2 v-red>电影详情</h2>
+```
+
+```js
+// 自定义指令
+directives: {
+  red: {
+    // 一旦含有v-red指令的dom元素被插入到dom树中，执行该方法
+    // 传入的el就是绑定了v-red指令的dom对象
+    inserted (el) {
+      el.style.color = 'red'
+    }
+  }
+}
+```
+

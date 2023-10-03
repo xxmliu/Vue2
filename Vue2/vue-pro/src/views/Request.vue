@@ -110,6 +110,12 @@ import myaxios from '../http/MyAxios'
         })
       }
     },
+
+    mounted () {
+      console.log(this);
+      this.getMovies()
+    },
+
   }
 </script>
 

@@ -1,39 +1,38 @@
 <template>
   <div>
+    <h3>通过$route.query传递的id参数：{{ $route.query.id }}</h3>
+    <h3>通过$route.params传递的id参数：{{ $route.params.id }}</h3>
     <h2>电影详情</h2>
-    <img :src="movie.url" alt="" width="150px" />
-    <h3>电影名称：{{ movie.name }}</h3>
-    <h3>电影主演：{{ movie.actors.join("/") }}</h3>
-    <h3>电影类型：{{ movie.type }}</h3>
-    <h3>电影上映日期：{{ movie.showingon }}</h3>
-    <button @click="next">换一部</button>
+    <hr>
+
+      <img :src="movie.cover" alt="" width="150px" />
+      <h3>电影名称：{{ movie.title }}</h3>
+      <h3>电影主演：{{ movie.star_actor }}</h3>
+      <h3>电影类型：{{ movie.type }}</h3>
+      <h3>电影上映日期：{{ movie.showingon}}</h3>
+      <h3>电影简介：{{ movie.description }}</h3>
   </div>
 </template>
 
 <script>
+import myaxios from '@/http/MyAxios';
 export default {
   data() {
     return {
-      movie:{
-        url: "https://p0.pipi.cn/mmdb/fb738633be1b128d3357e2418539bafea3dbb.jpg?imageView2/1/w/464/h/644",
-        name: "坚如磐石",
-        actors: ["雷佳音", "张国立", "于和伟"],
-        type: "动作 悬疑 剧情",
-        showingon: "2023-09-28",
-      },
-      
+      movie:{}
     };
   },
   methods: {
-    next(){
-      this.movie = {
-        url : 'https://p0.pipi.cn/mmdb/fb738633537f2a8ea38ea34efb781c44a0ea1.jpg?imageView2/1/w/464/h/644',
-        name : '奥本海默',
-        actors : ['基里安·墨菲', '小罗伯特·唐尼', '弗洛伦斯·皮尤'],
-        type : '剧情 传记 历史',
-        showingon : '2023-08-30'
-      }
-    }
+    
+  },
+  mounted () {
+    let id = this.$route.query.id || this.$route.params.id
+    let url = 'https://api.88-hao.top/movie-info/query'
+    let params = {id}
+    myaxios.get(url, params).then(res => {
+      console.log(res);
+      this.movie = res.data.data
+    })
   },
 };
 </script>

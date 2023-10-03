@@ -39,6 +39,11 @@ const routes = [
     component: () => import('../views/MovieDetail.vue')
   },
   {
+    path: '/movie/detail/:id',
+    name: 'movieDetail',
+    component: () => import('../views/MovieDetail.vue')
+  },
+  {
     path: '/directive',
     name: 'directive',
     component: () => import('../views/Directive.vue')

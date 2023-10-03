@@ -28,9 +28,11 @@
     <!-- 表格行 -->
     <div class="header" v-for="item in movies" :key="item.id">
       <div class="cover">
-        <img width="80px" :src="item.cover" alt="">
+        <router-link :to="`/movie/detail?id=${item.id}`">
+          <img width="80px" :src="item.cover" alt="">
+        </router-link>
       </div>
-      <div class="title">{{item.title}}</div>
+      <div @click="$router.push('/movie/detail/'+item.id)" class="title">{{item.title}}</div>
       <div class="actor">{{item.star_actor}}</div>
       <div class="showingon">{{item.showingon}}</div>
       <div class="type">{{item.type}}</div>
@@ -56,7 +58,6 @@ import myaxios from '../http/MyAxios'
     },
 
     methods: {
-
       // 基于myaxios发送get请求，加载电影详情
       getMoviesMyAxios() {
         let url = 'https://api.88-hao.top/movie-infos'
@@ -141,6 +142,7 @@ button{
     padding: 10px 0px;
     align-items: center;
     border-bottom: 1px solid #ccc;
+    cursor: pointer;
 
     .cover { width: 150px; }
     .title { flex: 1;}

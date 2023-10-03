@@ -176,11 +176,18 @@ Vue.use(VueRouter)
 
 // 2.在routes中使用component进行映射组件，用name导航到对应路由
 const routes = [
+  // 配置路由：
+  // 1.标准模式  
   {
     path: '/',
     name: 'home',
     component: HomeView
-  }
+  },
+  // 2.懒加载模式：懒加载模式意味着当访问/request时才回去加载该组件资源，否则不加载
+  {
+    path: '/request',
+    component: () => import('../views/Request.vue')
+   },
 ]
 
 // 3.创建router实例，传入routes配置，在里面定义路由模式history
@@ -191,6 +198,72 @@ const router = new VueRouter({
 })
 
 export default router
+```
+
+# 基于路由系统完成页面跳转功能  
+
+**1.基于组件的方式进行跳转**  
+
+<router-link ></router-link> ，类似超链接，实现路由的跳转：  
+
+```html
+<router-link to="/request">点我跳转</router-link>
+<router-link :to="{path:'/request'}">点我跳转</router-link>
+```
+
+**2.编程式跳转**  
+
+```js
+doClick(){
+  this.$router.push('/request') // 跳转到目标路由组件
+  this.$router.replace('/request') // 替换当前路由组件
+  this.$router.go(-1) // 回到上一页
+  this.$router.push({path:'/request'}) // 跳转到目标路由组件
+  this.$router.push({name:'about'}) // 跳转到目标路由组件
+}
+```
+
+this.$router是 router/index.js导出的router对象，用于表示全局的路由管理器，管理着所有的路由对象  
+
+**注意：不要重复跳转到当前地址**  
+
+# 路由跳转过程中的参数传递问题  
+
+**1.第一种传参方案  :**
+
+使用?在路径后拼接查询字符串参数即可：  
+
+```html
+<router-link to="/movie/detail?id=156">带着id去跳转</router-link>
+```
+
+如上述方式可以将参数id直接带到目标页，在目标页面中如下代码即可获取到id参数：  
+
+```js
+let id = this.$route.query.id
+```
+
+**2.第二种传参方案**  
+
+将参数藏在请求资源路径后进行参数传递：  
+
+```js
+this.$router.push('/movie/detail/561')
+```
+
+如上传递参数，需要修改router配置文件index.js：  
+
+```js
+{
+  path: '/movie/detail/:id',
+  component: .....MovieDetail.vue
+}
+```
+
+如上配置即可匹配目标地址，在详情页中如下获取id参数：  
+
+```js
+let id = this.$route.params.id
 ```
 
 # Vue的常用指令  

@@ -18,6 +18,7 @@
 
     <!-- 输出查询结果 -->
     <person v-for="item in actors" :key="item.id"
+      @delete="deleteActor(item.id, $event)"
       :name="item.actor_name"
       :avatar="item.actor_avatar">
     </person>
@@ -47,7 +48,7 @@ import axios from 'axios'
           this.actors = res.data.data
         })
       },
-      search(){
+      listActorsByName(){
         let instance = axios.create()
         instance({
           url: 'https://api.88-hao.top/movie-actors/name',
@@ -57,6 +58,44 @@ import axios from 'axios'
           console.log(res);
           this.actors = res.data.data
         })
+      },
+      search() {
+        if(this.name.trim()){
+          this.listActorsByName()
+        }else{
+          this.listActors()
+        }
+      },
+      deleteActor(id,e){
+
+        this.$confirm('此操作将永久删除该演员, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(res => {
+            let instance = axios.create()
+            instance({
+              url:'https://api.88-hao.top/movie-actor/del',
+              method: 'POST',
+              data: 'id='+id
+            }).then(res => {
+              console.log(res);
+              if(res.data.code==200){
+                this.search()
+                this.$message({
+                  type: 'success',
+                  message: '删除成功!'
+                });
+              }
+            })
+          }).catch(res => {
+              this.$message({
+                  type: 'info',
+                  message: '已取消删除'
+                }); 
+            })
+          
+
       }
     },
     mounted () {

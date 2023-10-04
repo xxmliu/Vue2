@@ -717,6 +717,12 @@ props: ['value'],
 
 在设计子组件时，可以在布局中定义一个插槽位置并且设置基础样式，父组件在使用时就可以通过slot属性来定一台的设置需要显示的内容。  
 
+# 父子组件传参
+
+父传子：父组件需要把传递的数据绑定到属性上，然后子组件通过props接收数据。
+
+子传父：子组件是不能直接传递数据给父组件，需要通过this.$event('自定义的事件名', '要发送的数据')抛出，然后父组件通过设置一个监听事件接收，然后就可以拿到数据了。
+
 # Vue组件的生命周期  
 
 整个vue项目就是由一个一个组件组成的。每个组件各司其职，当需要看到某一个组件时，vue框架就会创建该组件对象，将组件的内容**挂载**到页面上显示。当需要跳转页面时，vue将会从dom中卸载该组件，销毁它，然后创建新组件，将新组件挂载到页面中显示。  
@@ -741,5 +747,42 @@ export default {
   beforeDestroy(){ },
   destroyed(){ }
 }
+```
+
+# Vue的事件修饰符  
+
+在vue中，为标签绑定事件的方式：  
+
+```html
+<div id="bb" @click="clickbb">
+  <div id="ez" @click="clickez"></div>
+</div>
+<input @keyup="">
+<form @submit=""></form>
+```
+
+在上述事件的处理函数中，可能需要：阻止事件冒泡、阻止浏览器默认行为、获取按键键值等需求。这些需求都要在事件处理函数中依靠事件对象（event）来实现。
+
+vue认为：事件处理函数内部应该更多的聚焦在业务功能的实现上，而不是这些琐碎的事件对象的处理。所以vue提供了很多事件修饰符来帮助简化这些代码： 
+
+```html
+<div id="bb" @click="clickbb">
+  <div id="ez" @click.stop="clickez"></div>
+</div>
+<input @keyup.enter="">
+<form @submit.prevent=""></form>
+```
+
+**.native的作用**  
+
+native事件修饰符的作用是：将当前绑定的事件当做是html原生事件来看待。  
+
+```html
+<!-- keyup为dom原生事件：按键抬起时触发 -->
+<input @keyup=""> 
+<!-- keyup将被理解为elinput的自定义事件，何时被触发由组件决定 -->
+<el-input @keyup=""></el-inputel>
+<!-- 将keyup当做dom原生事件来看待 -->
+<el-input @keyup.native=""></el-input>
 ```
 

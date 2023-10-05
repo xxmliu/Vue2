@@ -18,7 +18,7 @@
 
     <!-- 输出查询结果 -->
     <person v-for="item in actors" :key="item.id"
-      @delete="deleteActor(item.id, $event)"
+      @delete="deleteActor(item.id)"
       :name="item.actor_name"
       :avatar="item.actor_avatar">
     </person>
@@ -28,6 +28,8 @@
 <script>
 import Person from '@/components/Person.vue'
 import axios from 'axios'
+import httpApi from '@/http/index'
+
   export default {
   components: { Person },
     data() {
@@ -38,23 +40,13 @@ import axios from 'axios'
     },
     methods: {
       listActors() {
-        let instance = axios.create()
-        instance({
-          url: 'https://api.88-hao.top/movie-actors',
-          method:'GET',
-          params: {page:1,pagesize:100}
-        }).then(res => {
+        httpApi.actorApi.queryAllActors().then(res => {
           console.log(res);
           this.actors = res.data.data
         })
       },
       listActorsByName(){
-        let instance = axios.create()
-        instance({
-          url: 'https://api.88-hao.top/movie-actors/name',
-          method:'POST',
-          data: 'name=' + this.name
-        }).then(res => {
+        httpApi.actorApi.queryByNameLike({name:this.name}).then(res => {
           console.log(res);
           this.actors = res.data.data
         })
@@ -66,19 +58,14 @@ import axios from 'axios'
           this.listActors()
         }
       },
-      deleteActor(id,e){
-
+      deleteActor(id){
         this.$confirm('此操作将永久删除该演员, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(res => {
-            let instance = axios.create()
-            instance({
-              url:'https://api.88-hao.top/movie-actor/del',
-              method: 'POST',
-              data: 'id='+id
-            }).then(res => {
+          httpApi.actorApi.delete({id})
+            .then(res => {
               console.log(res);
               if(res.data.code==200){
                 this.search()

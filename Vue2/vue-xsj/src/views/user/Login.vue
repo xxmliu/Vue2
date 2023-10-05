@@ -70,23 +70,29 @@ export default {
         username: this.form.username,
         password: this.form.password
       }
-      httpApi.adminApi.login(params).then(res => {
-        console.log(res);
-        if(res.data.code == 200){
-          this.$router.replace('/home/index')
-          this.$message({
-            showClose: true,
-            message: '恭喜您登陆成功，欢迎来到新世纪影城',
-            type: 'success'
-          })
-        }else{
-          this.$message({
-            showClose: true,
-            message: res.data.msg,
-            type: 'error'
-          });
-        }
-      })
+
+      this.$store.dispatch('login',params)
+      // httpApi.adminApi.login(params).then(res => {
+      //   console.log(res);
+      //   if(res.data.code == 200){
+
+      //     this.$store.commit('updateUser',res.data.data.user)
+
+
+      //     this.$router.replace('/home/index')
+      //     this.$message({
+      //       showClose: true,
+      //       message: '恭喜您登陆成功，欢迎来到新世纪影城',
+      //       type: 'success'
+      //     })
+      //   }else{
+      //     this.$message({
+      //       showClose: true,
+      //       message: res.data.msg,
+      //       type: 'error'
+      //     });
+      //   }
+      // })
     },
   },
 };

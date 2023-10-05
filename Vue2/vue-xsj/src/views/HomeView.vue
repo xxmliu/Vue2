@@ -45,7 +45,19 @@
         <el-header class="header">
           <i v-show="!isCollapse" class="el-icon-s-fold" @click="isCollapse=true"></i>
           <i v-show="isCollapse" class="el-icon-s-unfold" @click="isCollapse=false"></i>
-          <span>未登录</span>
+
+          <div v-if="$store.state.user">
+            <span>{{ $store.state.user.nickname }}</span>
+            |
+            <span>{{ $store.state.user.phone }}</span>
+            |
+            <span>{{ $store.state.user.email }}</span>
+          </div>
+
+          <div v-else>
+            <span>未登录</span>
+          </div>
+
         </el-header>
 
         <el-main>

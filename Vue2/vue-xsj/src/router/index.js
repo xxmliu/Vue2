@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -40,5 +41,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach((to, from ,next) => {
+  if(to.path == '/user/login'){
+    next()
+    return;
+  }
+
+  let user = store.state.user
+  if (user){ // 用户已经登录
+    next()
+  } else{
+    router.push('/user/login')
+  }
+})  
 
 export default router

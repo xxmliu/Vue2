@@ -11,10 +11,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
-    user: null,
-    city: '北京',
-    token: 'tokenxxxxx',
-    data: []
   },
   getters: {
   },

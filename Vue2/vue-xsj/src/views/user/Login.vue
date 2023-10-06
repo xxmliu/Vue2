@@ -36,6 +36,7 @@
 
 <script>
 import httpApi from '@/http';
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -65,13 +66,16 @@ export default {
   },
 
   methods: {
+
+    ...mapActions(['login']),
+
     onSubmit() {
       let params = {
         username: this.form.username,
         password: this.form.password
       }
 
-      this.$store.dispatch('login',params)
+      this.login(params)
       // httpApi.adminApi.login(params).then(res => {
       //   console.log(res);
       //   if(res.data.code == 200){

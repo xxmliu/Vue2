@@ -46,17 +46,20 @@
           <i v-show="!isCollapse" class="el-icon-s-fold" @click="isCollapse=true"></i>
           <i v-show="isCollapse" class="el-icon-s-unfold" @click="isCollapse=false"></i>
 
-          <div v-if="$store.state.user">
-            <span>{{ $store.state.user.nickname }}</span>
-            |
-            <span>{{ $store.state.user.phone }}</span>
-            |
-            <span>{{ $store.state.user.email }}</span>
+          <div v-if="user">
+            <i class="el-icon-user"></i>
+            <span>{{ user.nickname }}</span>
+            &nbsp;|&nbsp;
+            <i class="el-icon-phone-outline"></i>
+            <span>{{ user.phone }}</span>
+            &nbsp;|&nbsp;
+            <i class="el-icon-message"></i>
+            <span>{{ user.email }}</span>
           </div>
 
-          <div v-else>
+          <!-- <div v-else>
             <span>未登录</span>
-          </div>
+          </div> -->
 
         </el-header>
 
@@ -70,12 +73,24 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
       isCollapse: false
     }
   },
+  // 如下写法，this.user就是vuex中state里的user
+  // computed:mapState(['user','token'])
+  computed: {
+    ...mapState(['user', 'token']),
+  },
+
+  methods: {
+    // 以下写法相当于将vuex的mutations中声明的updateUser方法引入
+    // 调用this.updateUser(参数对象),即可执行vuex中的mutations
+    ...mapMutations(['updateUser'])
+  }
 };
 </script>
 

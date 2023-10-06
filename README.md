@@ -200,6 +200,13 @@ const router = new VueRouter({
 export default router
 ```
 
+# router和route的区别？
+
+**route 是用来获取路由信息的，router是用来操作路由的**
+
+- router 是VueRouter的实例，全局的路由对象。
+- route相当于正在跳转的路由对象。
+
 # 基于路由系统完成页面跳转功能  
 
 **1.基于组件的方式进行跳转**  
@@ -786,3 +793,48 @@ native事件修饰符的作用是：将当前绑定的事件当做是html原生�
 <el-input @keyup.native=""></el-input>
 ```
 
+# Vuex
+
+Vuex 是一个专为 Vue应用程序开发的**状态管理模式**。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。  
+
+vuex主要用于将一些数据实现全局存储（**且具备响应式的特点**），需要的时候直接访问vuex即可获取这些数据  
+
+### vuex的核心概念  
+
+​	**Vuex有五个属性：state、getters、mutations、actions、modules**
+
+- state 单一状态树。用于存储全局共享的数据信息 ，里面存储的数据是响应式的，一般用this.$store.state调用
+
+- getters 相当于store的计算属性，主要是对state中的数据进行过滤
+
+- mutations 可以声明一些方法，来修改start的数据
+
+- actions 和mutations类似，用于定义一些方法，执行任务后得到结果，然后更新state，但是它和mutations不同的是，mutations执行的是同步的方法，actions执行的是异步的方法
+
+- modules 就是当一个项目比较大的时候，Vuex 允许我们将 store 分割成模块（module）。每个模块拥有自己的 state、mutation、action、getter。这样可以对多种的全局状态进行分类管理。
+
+  
+
+1. 什么使用用vuex？
+2. 怎么用？
+
+虽然vuex很好用，可以方便的实现SPA单页面应用的状态数据的统一集中管理，但是不能刷新，一旦用户刷新了浏览器，就会重新加载整个vue环境，vuex中的数据也将会初始化  
+
+所以在使用vuex存储数据时 ，应借助于html5提供的sessionStorage与localStorage来完成。当向vuex中存储数据时，还需要向webStorage存一份（这个地方可以长久存储），当用户f5刷新页面时，vuex中数据可以从webstorage中读取并初始化。  
+
+```js
+sessionStorage.setItem()
+localStorage.setItem()
+```
+
+登录后，刷新用户状态不消失的实现思路：
+
+1. 当登录成功，向vuex中存储用户对象，同时也需要向sessionStorage中存一份
+
+2. 当vuex初始化时，直接从sessionStorage中加载初始化数据
+
+   ```js
+   state:{
+     user: sessionStorage.getItem(xx)
+   }
+   ```

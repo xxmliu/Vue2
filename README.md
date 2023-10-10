@@ -289,7 +289,9 @@ let id = this.$route.params.id
 
 # v-for的用法
 
-v-for指令用于循环输出当前元素。例如：  
+v-for的优先级会高于v-if，一起使用会造成性能浪费。
+
+v-for指令用于循环输出当前元素。例如:
 
 ```html
 <p v-for="items in names" :key="items">{{ items }}</p>
@@ -838,3 +840,15 @@ localStorage.setItem()
      user: sessionStorage.getItem(xx)
    }
    ```
+
+# vue2和vue3有什么不同？
+
+- 性能
+  优化了虚拟 DOM、Diff 算法、模板编译，渲染速度更快。
+- vue2的做法将 data(){ } 函数return出的所有数据无差别的**都进行数据监听**。一旦在代码执行过程中，将data中的数据进行了改变，则立即触发监听，更新UI。达到数据实时响应的效果。 --- 这种无差别的数据监听很消耗资源
+- vue3的做法是将数据的自动响应式改为手动，由程序员人为判断哪些变量需要响应式（实时更新）。可以通过代理API多写一些代码来监听变量的变化。
+
+
+​				1. ref() 代理普通基本数据类型变量
+
+​				2. reactive() 代理复杂对象

@@ -18,6 +18,11 @@ const directorApi = {
     let url = XSJURL + "/movie-director/del";
     return myaxios.post(url,params)
   },
+
+  upload(params){
+    let url = XSJURL + "/movie-director/add";
+    return myaxios.post(url, params)
+  }
 }
 
 export default directorApi

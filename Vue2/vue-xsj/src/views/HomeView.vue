@@ -16,7 +16,7 @@
               <span style="font-size: 1.2em; color:#efefef; font-weight: bold;">&nbsp;&nbsp;新世纪影城后台管理</span>
             </template>
           </el-menu-item>
-          <el-menu-item index="index">
+          <el-menu-item index="/home/index">
             <i class="el-icon-message"></i>
             <template slot="title">
               首页
@@ -29,7 +29,7 @@
               <i class="el-icon-location"></i>
               <span slot="title">演员管理</span>
             </template>
-            <el-menu-item index="/home/actor-list">
+            <el-menu-item index="/home/actor-list/1">
               <i class="el-icon-notebook-2"></i>
               <span slot="title">演员列表</span>
             </el-menu-item>

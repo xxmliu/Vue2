@@ -21,7 +21,7 @@ const routes = [
         component: () => import('../views/Index.vue')
       },
       {
-        path: 'actor-list',
+        path: 'actor-list/:page',
         component: () => import('../views/actor/ActorList.vue')
       },
       {
@@ -45,7 +45,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

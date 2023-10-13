@@ -45,24 +45,38 @@ export default {
 .person {
   display: inline-block;
   margin: 0px 10px 10px 0px;
+  box-shadow: 2px 2px 2px #ccc;
+  border-radius: 5px;
+  cursor: pointer;
   position: relative;
+
+  &:hover {
+    box-shadow: 3px 3px 3px #666;
+  }
 
   i {
     position: absolute;
     top: -5px;
     right: -5px;
+    color: red;
     background-color: #fff;
     border-radius: 50%;
     font-size: 1.2em;
     display: none;
+
+    &:hover{
+      opacity: 0.7;
+    }
   }
 
   img {
     width: 90px;
+    border-radius: 5px 5px 0 0;
   }
   div {
     font-size: 0.9em;
     width: 90px;
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

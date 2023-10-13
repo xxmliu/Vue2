@@ -10,15 +10,20 @@ const actorApi = {
     return myaxios.post(url, params);
   },
 
-  queryAllActors(){
+  queryAllActors(params){
     let url = XSJURL + "/movie-actors";
-    return myaxios.get(url, {page:1, pagesize:100});
+    return myaxios.get(url, params);
   },
 
   delete(params){
     let url = XSJURL + "/movie-actor/del";
     return myaxios.post(url,params)
   },
+
+  upload(params){
+    let url = XSJURL + "/movie-actor/add"
+    return myaxios.post(url, params)
+  }
   
 }
 

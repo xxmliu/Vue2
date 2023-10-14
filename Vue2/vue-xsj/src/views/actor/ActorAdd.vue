@@ -8,7 +8,7 @@
       <el-form-item label="演员头像" prop="actorAvatar">
         <el-upload
           class="avatar-uploader"
-          action="http://localhost:9000/upload"
+          :action = "`${UPLOADURL}/upload`"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">

@@ -71,6 +71,7 @@ export default {
 
   img {
     width: 90px;
+    height: 120px;
     border-radius: 5px 5px 0 0;
   }
   div {

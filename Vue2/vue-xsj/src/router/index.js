@@ -35,6 +35,14 @@ const routes = [
       {
         path: 'director-add',
         component: () => import('../views/director/DirectorAdd.vue')
+      },
+      {
+        path: 'movie-list',
+        component: () => import('../views/movie/MovieList.vue')
+      },
+      {
+        path: 'movie-add',
+        component: () => import('../views/movie/MovieAdd.vue')
       }
     ]
   },
